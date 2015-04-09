@@ -37,6 +37,7 @@ var TeamcityReporter = function(baseReporterDecorator) {
   this.TEST_FAILED   = '##teamcity[testFailed name=\'%s\' message=\'FAILED\' details=\'%s\']';
   this.TEST_END      = '##teamcity[testFinished name=\'%s\' duration=\'%s\']';
   this.TEST_ERROR    = '##teamcity[message text=\'%s\' errorDetails=\'%s\' status=\'ERROR\']';
+  this.FAIL_BUILD    = '##teamcity[buildProblem description=\'%s\']';
   this.BLOCK_OPENED  = '##teamcity[blockOpened name=\'%s\']';
   this.BLOCK_CLOSED  = '##teamcity[blockClosed name=\'%s\']';
 
@@ -85,7 +86,7 @@ var TeamcityReporter = function(baseReporterDecorator) {
 
   this.onRunComplete = function() {
     var self = this;
-
+    
     Object.keys(this.browserResults).forEach(function(browserId) {
       var browserResult = self.browserResults[browserId];
       var log = browserResult.log;
@@ -100,6 +101,8 @@ var TeamcityReporter = function(baseReporterDecorator) {
   
   this.onBrowserError = function(browser, error) {
     this.write(formatMessage(this.TEST_ERROR, browser.name, error));
+    this.write(formatMessage(this.FAIL_BUILD, error));
+	
   };
 
   this.getLog = function(browser, result) {
