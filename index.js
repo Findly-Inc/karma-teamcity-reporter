@@ -37,7 +37,7 @@ var TeamcityReporter = function(baseReporterDecorator) {
   this.TEST_FAILED   = '##teamcity[testFailed name=\'%s\' message=\'FAILED\' details=\'%s\']';
   this.TEST_END      = '##teamcity[testFinished name=\'%s\' duration=\'%s\']';
   this.TEST_ERROR    = '##teamcity[message text=\'%s\' errorDetails=\'%s\' status=\'ERROR\']';
-  this.FAIL_BUILD    = '##teamcity[buildProblem description=\'Error(s) during test run\' identity=\'%s\']';
+  this.FAIL_BUILD    = '##teamcity[buildProblem description=\'%s\']';
   this.BLOCK_OPENED  = '##teamcity[blockOpened name=\'%s\']';
   this.BLOCK_CLOSED  = '##teamcity[blockClosed name=\'%s\']';
 
